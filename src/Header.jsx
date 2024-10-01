@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Sun from "./assets/icons/sun.svg";
 import Logo from "./assets/logo.svg";
 import Ring from "./assets/ring.svg";
 import ShoppingCart from "./assets/shopping-cart.svg";
 import CardDetails from "./cine/CardDetails";
+import { MovieContext } from "./context";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
+  const { cartData } = useContext(MovieContext);
+  console.log(cartData);
 
   function handleCartShow() {
     setShowCart(true);
   }
   return (
     <header>
-      {showCart && <CardDetails />}
+      {showCart && <CardDetails onClose={() => setShowCart(false)} />}
       <nav className="container flex items-center justify-between space-x-10 py-6">
         <a href="index.html">
           <img src={Logo} width="139" height="26" alt="" />
@@ -43,6 +46,7 @@ export default function Header() {
               href="#"
             >
               <img src={ShoppingCart} width="24" height="24" alt="" />
+              {cartData.length > 0 && <span>{cartData.length}</span>}
             </a>
           </li>
         </ul>
