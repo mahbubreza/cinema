@@ -11,7 +11,9 @@ const cartReducer = (state, action) => {
     case "REMOVE_FROM_CARD":
       return {
         ...state,
-        cartData: state.cartData.flter((item) => item.id !== action.payload.id),
+        cartData: state.cartData.filter(
+          (item) => item.id !== action.payload.id
+        ),
       };
       break;
     default:
